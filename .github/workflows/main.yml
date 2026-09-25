@@ -19,25 +19,19 @@ jobs:
           node-version: '20'
 
       - name: Create Base Project
-        run: |
-          npm init -y
-          npm install @capacitor/core @capacitor/cli @capacitor/android
-          mkdir -p www
+        run: npm init -y && npm install @capacitor/core @capacitor/cli @capacitor/android && mkdir -p www
 
       - name: Create Capacitor Config
-        run: |
-          echo '{"appId":"com.melloexpress.flow","appName":"Mello Express","webDir":"www","server":{"url":"https://mello-express-flow.base44.app","cleartext":true,"allowNavigation":["*"]}}' > capacitor.config.json
+        run: echo '{"appId":"com.melloexpress.flow","appName":"Mello Express","webDir":"www","server":{"url":"https://mello-express-flow.base44.app","cleartext":true,"allowNavigation":["*"]}}' > capacitor.config.json
 
       - name: Initialize Android Platform
-        run: |
-          npx cap add android || true
-          npx cap sync android
+        run: npx cap add android || true
+
+      - name: Sync Capacitor
+        run: npx cap sync android
 
       - name: Build APK with Gradle
-        run: |
-          cd android
-          chmod +x gradlew
-          ./gradlew assembleDebug
+        run: cd android && chmod +x gradlew && ./gradlew assembleDebug
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
