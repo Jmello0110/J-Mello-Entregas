@@ -24,16 +24,9 @@ jobs:
           npm install @capacitor/core @capacitor/cli @capacitor/android
           mkdir -p www
 
-      - name: Create Base Project
-        run: |
-          npm init -y
-          npm install @capacitor/core @capacitor/cli @capacitor/android
-          mkdir -p www
-
       - name: Create Capacitor Config
         run: |
           echo '{"appId":"com.melloexpress.flow","appName":"Mello Express","webDir":"www","server":{"url":"https://mello-express-flow.base44.app","cleartext":true,"allowNavigation":["*"]}}' > capacitor.config.json
-        
 
       - name: Initialize Android Platform
         run: |
