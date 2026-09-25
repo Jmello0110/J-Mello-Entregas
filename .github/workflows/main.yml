@@ -18,18 +18,18 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Dependencies
+      - name: Create Base Project
         run: |
+          npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/android
-          mkdir www
+          mkdir -p www
 
       - name: Create Capacitor Config
         run: |
-          echo '{"appId":"com.seuapp.base44","appName":"Meu App","webDir":"www","server":{"url":"https://base44.app","cleartext":true,"allowNavigation":["*"]}}' > capacitor.config.json
+          echo '{"appId":"https://mello-express-flow.base44.app","appName":"Meu App","webDir":"www","server":{"url":"https://base44.app","cleartext":true,"allowNavigation":["*"]}}' > capacitor.config.json
 
-      - name: Sync Capacitor
+      - name: Initialize Android Platform
         run: |
-          npx cap integrity
           npx cap add android || true
           npx cap sync android
 
